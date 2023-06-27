@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'news/styte.css'%}">
+</head>
+<body>
+    <div class="center-table">
+        <table class="form-table">
+            <tr>
+                <td>
+                    <form action="{% url 'news:save'%}" method="post">
+                        {% csrf_token %}
+                        <div class="form-field">
+                            <label for="id_title">Title:</label>
+                            {{ f.title }}
+                        </div>
+                
+                        <div class="form-field">
+                            <label for="id_content">Content:</label>
+                            {{ f.content }}
+                        </div>
+                
+                        <div class="form-field">
+                            <input type="submit" value="Thêm">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
