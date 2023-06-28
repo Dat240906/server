@@ -1,9 +1,10 @@
 {
+    "version": 2,
     "builds": [
       { "src": "demoform/wsgi.py", "use": "@vercel/python" }
     ],
     "routes": [
+      { "handle": "filesystem" },
       { "src": "/(.*)", "dest": "demoform/wsgi.py" }
     ]
   }
-  

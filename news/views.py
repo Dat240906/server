@@ -16,5 +16,5 @@ def save_news(request):
         if g.is_valid():#is_valid là phù hợp với kiểu dữ liệu
             g.save()
             return HttpResponse("Thành công")
-        else:return HttpResponse("Không đúng type")
+        else:return HttpResponse("Không thành công, kiểm tra lại dữ liệu cho phép.")
     else:return HttpResponse("Không phải post")
