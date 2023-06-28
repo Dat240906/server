@@ -116,9 +116,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 import os
-STATIC_URL = '/static/'  # Đổi thành '/staticfiles/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Đổi thành BASE_DIR / 'staticfiles/'
-
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
