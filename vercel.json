@@ -1,0 +1,9 @@
+{
+    "builds": [
+      { "src": "demoform/wsgi.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "demoform/wsgi.py" }
+    ]
+  }
+  
