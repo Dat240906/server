@@ -1,1 +1,1 @@
-web: gunicorn demoform.wsgi --log-file -
+web: gunicorn demoform.wsgi:application --log-file - --log-level debug 
