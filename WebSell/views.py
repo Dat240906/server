@@ -74,3 +74,9 @@ class Contact(View):
             return render(request, 'WebSell/comback_contact.html', {'success':True})
         except:
             return render(request, 'WebSell/comback_contact.html', {'success':False})
+
+
+class Logout(View):
+    def get(self, request):
+        request.session['is_login'] = False
+        return redirect('Websell:home')

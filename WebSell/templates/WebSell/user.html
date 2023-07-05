@@ -117,7 +117,7 @@
                     {% csrf_token %}
 					<label for="chk" aria-hidden="true">Sign up</label>
 					{{f.username}}
-					{% if massage_error_signup %}
+					{% if massage_error_signup and not massage_error_login %}
 						<p class="errorsignup">*{{massage_error_signup}}</p>
 					{% endif %}
 					{{f.email}}

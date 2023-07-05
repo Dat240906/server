@@ -2,129 +2,280 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About - Online Store</title>
-    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css' %}">
+
     <style>
-        .about {
-            padding: 40px 0;
-            text-align: center;
+      .user-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .user-dropdown-toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .user-dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .user-dropdown-content a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+      }
+
+      .user-dropdown:hover .user-dropdown-content {
+        display: block;
+      }
+
+      /* Reset CSS */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: transparent;
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      nav li {
+        margin-right: 20px;
+      }
+
+      nav a {
+        position: relative;
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 10px;
+        border-radius: 5px;
+        transition: box-shadow 0.3s;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: transparent;
+        transition: background-color 0.3s;
+      }
+      nav a:hover {
+        box-shadow: 0 0 5px 2px rgb(242, 242, 242);
+      }
+
+      .user {
+        margin-top: -30px;
+        margin-left: 30px;
+      }
+
+      footer {
+        position: fixed;
+        bottom: -50px;
+        left: 0;
+        width: 100%;
+        background-color: rgb(59, 57, 57);
+        text-align: center;
+        color: #fff;
+        transition: bottom 0.5s ease-in-out;
+      }
+
+      footer.visible {
+        bottom: 0;
+      }
+
+      footer p {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      .about {
+        padding: 40px 0;
+        text-align: center;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://i.pinimg.com/736x/fb/3f/c3/fb3fc3b7b58832c7f302273675121df4.jpg");
+        background-size: 130%;
+        color: #fff;
+        background-position: -200px;
+        background-repeat: no-repeat;
+      }
+
+      .chua {
+        max-width: 800px;
+        margin: 0 auto;
+        margin-top: 10%;
+      }
+
+      .about h1 {
+        font-size: 28px;
+        color: #7f057b;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        animation: typing 1s forwards;
+      }
+
+      .about p {
+        font-size: 16px;
+        color: #ffffff;
+        line-height: 1.6;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        animation: typing-slow 1s forwards;
+      }
+
+      @keyframes typing {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
         }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('https://i.pinimg.com/736x/fb/3f/c3/fb3fc3b7b58832c7f302273675121df4.jpg');
-            background-size: 130%;
-            color: #fff;
-            background-position: -200px;
-            background-repeat: no-repeat;
+        100% {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .chua {
-            max-width: 800px;
-            margin: 0 auto;
-            margin-top: 10%;
+      @keyframes typing-slow {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
         }
-
-        .about h1 {
-            font-size: 28px;
-            color: #7f057b;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            animation: typing 1s forwards;
+        50% {
+          opacity: 0;
+          transform: translateY(20px);
         }
-
-        .about p {
-            font-size: 16px;
-            color: #ffffff;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            animation: typing-slow 1s forwards;
+        100% {
+          opacity: 1;
+          transform: translateY(0);
         }
-
-        @keyframes typing {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes typing-slow {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            50% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
+      }
     </style>
-
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'Websell:home' %}">Home</a></li>
-                <li><a href="{% url 'Websell:products' %}">Products</a></li>
-                <li><a href="{% url 'Websell:about' %}" class="active" >About</a></li>
-                <li><a href="{% url 'Websell:contact' %}">Contact</a></li>
-            </ul>
-            <div class="user">
-                {% if not is_login %}
-                    <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
-                {% else %}
-                    <p>{{username}}</p>
-                {% endif %}
+      <nav>
+        <ul>
+          <li><a href="{% url 'Websell:home' %}">Home</a></li>
+          <li><a href="{% url 'Websell:products' %}">Products</a></li>
+          <li><a href="{% url 'Websell:about' %}" class="active">About</a></li>
+          <li><a href="{% url 'Websell:contact' %}">Contact</a></li>
+        </ul>
+        <div class="user">
+          {% if not is_login %}
+          <a href="{% url 'Websell:user'%}">Login</a> |
+          <a href="{% url 'Websell:user'%}">Sign Up</a>
+          {% else %}
+          <div class="user-dropdown">
+            <button class="user-dropdown-toggle">{{ username }}</button>
+            <div class="user-dropdown-content">
+              <a href="#">Profile</a>
+              <a href="{% url 'Websell:logout'%}">Logout</a>
             </div>
-        </nav>
+          </div>
+          {% endif %}
+        </div>
+      </nav>
     </header>
     <section class="about">
-        <div class="chua">
-            <h1>About Us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut lacus vel est cursus blandit. Proin lacinia justo sed diam ultrices luctus. Nulla id risus sit amet turpis interdum semper. Curabitur facilisis nisi quis ipsum rutrum, ut blandit tortor aliquet.</p>
-            <p>Phasellus ullamcorper lacus sed velit gravida tempus. Quisque nec feugiat neque. Ut sodales lacus mi, eu lacinia nisi condimentum nec. Integer a dui quis dui blandit accumsan. Nunc ut mauris id odio feugiat varius. Aliquam erat volutpat. Sed euismod nulla nec tristique volutpat. Nunc at commodo sem.</p>
-            <p>Donec blandit, ligula in dictum ullamcorper, ex nisi iaculis odio, non condimentum arcu mi vitae tellus. Pellentesque interdum rhoncus efficitur. Nulla bibendum mauris vitae nisi ultricies, nec condimentum elit laoreet. Vestibulum eleifend eleifend tellus eget vestibulum. Sed eget velit cursus, faucibus erat ac, vehicula dui.</p>
-        </div>
+      <div class="chua">
+        <h1>About Us</h1>
+        <p>
+          "Chào mừng đến với chúng tôi - nơi tập trung những cá nhân 'hài hước'
+          và 'lầy lội' nhất! Chúng tôi không chỉ là một nhóm đơn thuần, chúng
+          tôi là một đại gia đình đầy năng lượng và trí tưởng tượng. Với chúng
+          tôi, mỗi ngày đều là một cơ hội để làm rơi gương mặt và mang đến tiếng
+          cười sảng khoái cho mọi người.
+        </p>
+
+        <p>
+          Chúng tôi không chỉ đơn thuần là những hài hước gia, chúng tôi còn là
+          những người sáng tạo, biến những ý tưởng lầy lội thành hiện thực. Bằng
+          cách kết hợp sự hài hước, sự đồng đội và một chút điên rồ, chúng tôi
+          tạo ra những trải nghiệm độc đáo và bất ngờ.
+        </p>
+
+        <p>
+          Với chúng tôi, không có khái niệm 'chán' hay 'nhàm chán'. Chúng tôi
+          luôn tìm cách để mọi thứ trở nên thú vị hơn, từ công việc đến cuộc
+          sống hàng ngày. Hãy đồng hành cùng chúng tôi trong hành trình khám phá
+          vui nhộn và tràn đầy tiềm năng!
+        </p>
+
+        <p>
+          Và đừng quên, khi cần một chút cười giòn tan và tiếng cười sảng khoái,
+          hãy đến với chúng tôi. Chúng tôi cam kết sẽ mang đến cho bạn những
+          trận cười không thể nào quên!
+        </p>
+
+        <p>
+          Hy vọng đoạn văn trên có thể mang lại một chút vui vẻ và hài hước cho
+          bạn!
+        </p>
+      </div>
     </section>
     <footer>
-        <div class="container">
-            <p>&copy; 2023 Online Store. All rights reserved.</p>
-        </div>
+      <div class="container">
+        <p>&copy; 2023 Online Store. All rights reserved.</p>
+      </div>
     </footer>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var h1 = document.querySelector(".about h1");
-            var paragraphs = document.querySelectorAll(".about p");
+      document.addEventListener("DOMContentLoaded", function () {
+        var h1 = document.querySelector(".about h1");
+        var paragraphs = document.querySelectorAll(".about p");
 
-            setTimeout(function() {
-                h1.style.opacity = "1";
-            }, 1000);
+        setTimeout(function () {
+          h1.style.opacity = "1";
+        }, 1000);
 
-            for (var i = 0; i < paragraphs.length; i++) {
-                (function(index) {
-                    setTimeout(function() {
-                        paragraphs[index].style.opacity = "1";
-                    }, (index + 1) * 1000);
-                })(i);
-            }
-        });
+        for (var i = 0; i < paragraphs.length; i++) {
+          (function (index) {
+            setTimeout(function () {
+              paragraphs[index].style.opacity = "1";
+            }, (index + 1) * 1000);
+          })(i);
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

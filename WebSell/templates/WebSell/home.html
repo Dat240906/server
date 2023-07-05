@@ -7,8 +7,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Store</title>
-    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css'%}">
-    <link rel="stylesheet" href="{% static 'WebSell/home.css'%}">
+    <style>
+
+        .user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.user-dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.user-dropdown-content a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.user-dropdown:hover .user-dropdown-content {
+  display: block;
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Header Styles */
+header {
+    background-color: transparent;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+nav a:hover {
+    box-shadow: 0 0 5px 2px rgb(242, 242, 242);
+}
+
+.user {
+    margin-top: -30px;
+    margin-left: 30px;
+}
+
+footer {
+    position: fixed;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    background-color: rgb(59, 57, 57);
+    text-align: center;
+    color: #fff;
+    transition: bottom 0.5s ease-in-out;
+}
+
+footer.visible {
+    bottom: 0;
+}
+
+footer p {
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Hero Section Styles */
+.hero {
+    background-color: transparent;
+    padding: 100px 0;
+    text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://th.bing.com/th/id/R.7c9a0729ced19ff03b870c3af3e33f05?rik=hOejJWNxJvhnnw&riu=http%3a%2f%2fwebsolutions.com.vn%2fwp-content%2fuploads%2f2017%2f06%2fban-hang-gi-tren-mang.jpg&ehk=TWNnXRVFE6x2r%2bislM1ycub2KCnrpBYSU0pvGdVMwPI%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+    color: #fff;
+    background-position: -200px;
+    background-repeat: no-repeat;
+}
+
+.hero-content {
+    margin-top: 200px;
+}
+
+.hero h1 {
+    font-size: 50px; /* Kích thước chữ */
+    font-weight: bold; /* Độ đậm */
+    text-transform: uppercase; /* Chữ in hoa */
+    margin-bottom: 10px; /* Khoảng cách dưới */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 20px; /* Kích thước chữ */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #666;
+}
+/* Introduction Section Styles */
+.introduction {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    margin-top: 400px;
+}
+
+.introduction h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.introduction p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Guarantee Section Styles */
+.guarantee {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    margin-bottom: 400px;
+}
+
+.guarantee h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.guarantee p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+    </style>
 </head>
 <body>
     <header>
@@ -21,18 +220,25 @@
             </ul>
             <div class="user">
                 {% if not is_login %}
-                    <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
+                <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
                 {% else %}
-                    <p>{{username}}</p>
+                <div class="user-dropdown">
+                    <button class="user-dropdown-toggle">{{ username }}</button>
+                    <div class="user-dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="{% url 'Websell:logout'%}">Logout</a>
+                    </div>
+                </div>
                 {% endif %}
+
             </div>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to Our Online Store</h1>
-            <p>Discover a wide range of products for all your needs.</p>
+            <h1>Welcome to bờ rồ Store</h1>
+            <p>Cái gì khó có bờ rồ Store lo</p>
             <a href="{% url 'Websell:products'%}" class="btn">Shop Now</a>
         </div>
     </section>
@@ -40,9 +246,11 @@
     <section class="introduction">
         <div class="container">
             <h2>About Our Online Store</h2>
-            <p>Welcome to Our Online Store! We are dedicated to providing high-quality products and exceptional customer service. With a wide range of products for all your needs, we strive to make your shopping experience convenient and enjoyable.</p>
-            <p>Our team is committed to sourcing the best products from trusted suppliers, ensuring that you receive only top-notch items. We believe in offering competitive prices without compromising on quality.</p>
-            <p>Whether you're looking for the latest fashion trends, home essentials, electronics, or more, you'll find it all right here. Start exploring our diverse selection of products and discover something that suits your style and preferences.</p>
+            <p>Chào mừng đến với cửa hàng trực tuyến của chúng tôi! Chúng tôi được dành riêng để cung cấp các sản phẩm chất lượng cao và dịch vụ khách hàng đặc biệt. Với nhiều loại sản phẩm đáp ứng mọi nhu cầu của bạn, chúng tôi cố gắng làm cho trải nghiệm mua sắm của bạn trở nên thuận tiện và thú vị.</p>
+
+                <p>Nhóm của chúng tôi cam kết tìm nguồn cung ứng các sản phẩm tốt nhất từ các nhà cung cấp đáng tin cậy, chứng minh rằng bạn chỉ nhận được các mặt hàng hàng đầu. Chúng tôi tin tưởng vào việc cung cấp giá cả cạnh tranh mà không ảnh hưởng đến chất lượng.</p>
+            
+                    <p>Cho dù bạn đang tìm kiếm các xu hướng thời trang mới nhất, nhu yếu phẩm gia đình, đồ điện tử, v.v., bạn sẽ tìm thấy tất cả ngay tại đây. Bắt đầu khám phá lựa chọn sản phẩm đa dạng của chúng tôi và khám phá thứ gì đó phù hợp với phong cách và sở thích của bạn.</p>
 
         </div>
     </section>
@@ -50,9 +258,11 @@
     <section class="guarantee">
         <div class="container">
             <h2>Our Guarantee</h2>
-            <p>At Our Online Store, customer satisfaction is our top priority. We stand behind the quality of our products and aim to exceed your expectations in every aspect of your shopping experience.</p>
-            <p>With our guarantee, you can shop with confidence knowing that if you're not satisfied with your purchase, we'll work hard to make it right. Whether it's a refund, exchange, or assistance with any concerns, our dedicated customer support team is here to assist you.</p>
-            <p>We value your trust and strive to build long-lasting relationships with our customers. Your feedback is important to us, and we continuously improve our services based on your suggestions and needs.</p>
+            <p>Tại Cửa hàng trực tuyến của chúng tôi, sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi. Chúng tôi đứng đằng sau chất lượng sản phẩm của mình và hướng đến mục tiêu vượt quá mong đợi của bạn ở mọi khía cạnh trong trải nghiệm mua sắm của bạn. </p>
+
+                <p>Với sự đảm bảo của chúng tôi, bạn có thể yên tâm mua sắm khi biết rằng nếu bạn không hài lòng với giao dịch mua hàng của mình, chúng tôi sẽ nỗ lực để khắc phục. Cho dù đó là hoàn tiền, trao đổi hay hỗ trợ với bất kỳ mối quan tâm nào, nhóm hỗ trợ khách hàng tận tâm của chúng tôi luôn sẵn sàng hỗ trợ bạn.</p>
+
+                    <p>Chúng tôi đánh giá cao sự tin tưởng của bạn và cố gắng xây dựng mối quan hệ lâu dài với khách hàng của chúng tôi. Phản hồi của bạn rất quan trọng đối với chúng tôi và chúng tôi liên tục cải thiện dịch vụ của mình dựa trên các đề xuất và nhu cầu của bạn.</p>
         </div>
     </section>
 

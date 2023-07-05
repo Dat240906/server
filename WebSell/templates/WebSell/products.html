@@ -2,141 +2,326 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Online Store</title>
-    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css'%}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: url('https://media1.thehungryjpeg.com/thumbs2/ori_27204_a86d350a9f84e1366ac204539a66f6625d37ee4d_sacred-geometry-vector-patterns.jpg');
-            background-size: 130%;
-            color: #fff;
-            background-position: -200px;
-            background-repeat: no-repeat;
-        }
-        
-        .products {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            margin-top: 60px;
-            flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng khi không đủ không gian */
-            justify-content: space-between; 
-        }
-        
-        .product {
-            width: 300px;
-            padding: 20px;
-            background-color:rgba(255, 255, 255, 0.5);
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease-in-out;
-            margin-bottom: 50px; /* Khoảng cách giữa các sản phẩm */
-            margin-right: 50px;
-        }
-        
-        .product:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .product img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-        
-        .product h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        
-        .product p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #7f057b;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 3px;
-        }
-        
-        .btn:hover {
-            background-color: #5d0365;
-        }
+      .user-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .user-dropdown-toggle {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .user-dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .user-dropdown-content a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+      }
+
+      .user-dropdown:hover .user-dropdown-content {
+        display: block;
+      }
+
+      /* Reset CSS */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: transparent;
+        padding: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      nav li {
+        margin-right: 20px;
+      }
+
+      nav a {
+        position: relative;
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 10px;
+        border-radius: 5px;
+        transition: box-shadow 0.3s;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background-color: transparent;
+        transition: background-color 0.3s;
+      }
+      nav a:hover {
+        box-shadow: 0 0 5px 2px rgb(242, 242, 242);
+      }
+
+      .user {
+        margin-top: -30px;
+        margin-left: 30px;
+      }
+
+      footer {
+        position: fixed;
+        bottom: -50px;
+        left: 0;
+        width: 100%;
+        background-color: rgb(59, 57, 57);
+        text-align: center;
+        color: #fff;
+        transition: bottom 0.5s ease-in-out;
+      }
+
+      footer.visible {
+        bottom: 0;
+      }
+
+      footer p {
+        font-size: 12px;
+        margin: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v500-taus-03a-retrofuturismbackground_1.jpg?auto=format&bg=transparent&con=3&cs=srgb&dpr=1&fm=jpg&ixlib=php-3.1.0&mark=rawpixel-watermark.png&markalpha=90&markpad=13&markscale=10&markx=25&q=75&usm=15&vib=3&w=1400&s=f28450854224bf37abd9fbecf8e7c127");
+        background-size: 130%;
+        color: #fff;
+        background-repeat: no-repeat;
+      }
+
+      .products {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-top: 60px;
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng khi không đủ không gian */
+        justify-content: space-between;
+      }
+
+      .product {
+        width: 300px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease-in-out;
+        margin-bottom: 100px; /* Khoảng cách giữa các sản phẩm */
+        margin-right: 50px;
+      }
+
+      .product:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .product img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+
+      .product h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .product p {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #7f057b;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 3px;
+      }
+
+      .btn:hover {
+        background-color: #5d0365;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'Websell:home'%}">Home</a></li>
-                <li><a href="{% url 'Websell:products'%}" class="active" >Products</a></li>
-                <li><a href="{% url 'Websell:about'%}">About</a></li>
-                <li><a href="{% url 'Websell:contact'%}">Contact</a></li>
-            </ul>
-            <div class="user">
-                {% if not is_login %}
-                    <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
-                {% else %}
-                    <p>{{username}}</p>
-                {% endif %}
+      <nav>
+        <ul>
+          <li><a href="{% url 'Websell:home'%}">Home</a></li>
+          <li>
+            <a href="{% url 'Websell:products'%}" class="active">Products</a>
+          </li>
+          <li><a href="{% url 'Websell:about'%}">About</a></li>
+          <li><a href="{% url 'Websell:contact'%}">Contact</a></li>
+        </ul>
+        <div class="user">
+          {% if not is_login %}
+          <a href="{% url 'Websell:user'%}">Login</a> |
+          <a href="{% url 'Websell:user'%}">Sign Up</a>
+          {% else %}
+          <div class="user-dropdown">
+            <button class="user-dropdown-toggle">{{ username }}</button>
+            <div class="user-dropdown-content">
+              <a href="#">Profile</a>
+              <a href="{% url 'Websell:logout'%}">Logout</a>
             </div>
-        </nav>
+          </div>
+          {% endif %}
+        </div>
+      </nav>
     </header>
 
     <section class="products">
-        <div class="product">
-            <img src="https://o.remove.bg/downloads/3ab819e1-8bc8-416e-bc65-0dac4f3cd585/R-removebg-preview.png" alt="Product 1">
-            <h3>iPhone 15</h3>
-            <p>Công nghệ tân tiến và trải nghiệm vượt trội.</p>
-            <a href="#" class="btn">Add to Cart</a>
-        </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/OIP.G7hqU77koaHDBBiNmSEg2AHaIw?pid=ImgDet&rs=1"
+          alt="Product 1"
+        />
+        <h3>iPhone 15</h3>
+        <p>Công nghệ tân tiến và trải nghiệm đi vào lòng đất.</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
 
-        <div class="product">
-            <img width="200px" src="https://th.bing.com/th/id/R.8a805714a848ab9cc131177d07f1e37e?rik=4rPm%2fqfPiRhf%2fQ&pid=ImgRaw&r=0" alt="Product 2">
-            <h3>Lamborghini</h3>
-            <p>Sự kết hợp hoàn hảo giữa tốc độ, đẳng cấp và đam mê.</p>
-            <a href="#" class="btn">Add to Cart</a>
-        </div>
+      <div class="product">
+        <img
+          width="200px"
+          src="https://th.bing.com/th/id/R.8a805714a848ab9cc131177d07f1e37e?rik=4rPm%2fqfPiRhf%2fQ&pid=ImgRaw&r=0"
+          alt="Product 2"
+        />
+        <h3>Lamborghini</h3>
+        <p>
+          Sự kết hợp hoàn hảo giữa tốc độ, đẳng cấp, tặng kèm 1 nắm đất ngửi cho
+          quen.
+        </p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
 
-        <div class="product">
-            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
-            <h3>Ducati</h3>
-            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
-            <a href="#" class="btn">Add to Cart</a>
-        </div>
-        <div class="product">
-            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
-            <h3>Ducati</h3>
-            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
-            <a href="#" class="btn">Add to Cart</a>
-        </div>
-        <div class="product">
-            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
-            <h3>Ducati</h3>
-            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
-            <a href="#" class="btn">Add to Cart</a>
-        </div>
-        <div class="product">
-            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
-            <h3>Ducati</h3>
-            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
-            <a href="#" class="btn">Add to Cart</a>
-        </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/R.6aef9dcfbfc13066eab9f4e28e16adff?rik=J2Q16wWSx7JMFQ&pid=ImgRaw&r=0"
+          alt="Product 3"
+        />
+        <h3>Ducati</h3>
+        <p>
+          Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, răng môi lẫn lộn.
+        </p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/OIP.kFhsorG8U0SJ9SxfG_6LyQAAAA?pid=ImgDet&rs=1"
+          alt="Product 3"
+        />
+        <h3>Ghế nhựa Việt Nam</h3>
+        <p>Chất lượng và đẳng cấp - Ghế nhựa VN, lựa chọn hàng đầu!</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/R.96b1ff781381255c11fd596405a5355e?rik=MgRKJKL0s6A77Q&pid=ImgRaw&r=0"
+          alt="Product 3"
+        />
+        <h3>Ba Đum</h3>
+        <p>Gánh bạn lên Đồng 5</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/OIP.lfGMis0p0pq4EopFCXHYOQHaE8?pid=ImgDet&rs=1"
+          alt="Product 3"
+        />
+        <h3>Bàn tay của mẹ</h3>
+        <p>Mềm mại, uyển chuyển, thăng hoa trên từng nhịp đập.</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/R.8d0afb74f04f99bff961438c3aefea2e?rik=%2brpY0I69uo32hQ&pid=ImgRaw&r=0"
+          alt="Product 3"
+        />
+        <h3>Một chiếc mèo hư hỏng</h3>
+        <p>Nấu ăn, giặt đồ, phơi quần áo. là những thứ con này đéo làm được.</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/R.cacc5dab99cedcc450908b2bcb3152c1?rik=k6vZHTYftWMSOQ&pid=ImgRaw&r=0"
+          alt="Product 3"
+        />
+        <h3>Cán chổi của ba</h3>
+        <p>Được mệnh danh là ma tốc độ và có hackmap.</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/R.ec33d22161f4a14103fdf8978570b90f?rik=k0yBjg8Aqa13dQ&pid=ImgRaw&r=0"
+          alt="Product 3"
+        />
+        <h3>Đồng Tiền</h3>
+        <p>Tiền mới, sạch đẹp, tiêu thoải mái, đi tù mấy năm thì không biết</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img
+          src="https://th.bing.com/th/id/OIP.zIVQNhY9mimyIQHkd-DNxwHaEx?pid=ImgDet&rs=1"
+          alt="Product 3"
+        />
+        <h3>Thẻ hộ nghèo</h3>
+        <p>Mỗi người nên sắm 1 cái, tặng kèm 3 bích.</p>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
     </section>
 
     <footer>
-        <p>&copy; 2023 Online Store. All rights reserved.</p>
+      <p>&copy; 2023 Online Store. All rights reserved.</p>
     </footer>
-</body>
+  </body>
 </html>
