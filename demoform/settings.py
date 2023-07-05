@@ -125,6 +125,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# settings.py
+
+# Định nghĩa đường dẫn URL cho các tệp tin tĩnh
+import os
+# Đường dẫn tuyệt đối đến thư mục chứa các tệp tin tĩnh đã thu thập
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Danh sách các thư mục chứa các tệp tin tĩnh mà Django nên tìm kiếm
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Các finder (trình tìm kiếm) được sử dụng để tìm các tệp tin tĩnh
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+# Cơ sở lưu trữ để xử lý tệp tin tĩnh khi triển khai (tùy chọn)
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
