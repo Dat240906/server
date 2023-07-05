@@ -1,0 +1,43 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css'%}">
+    <link rel="stylesheet" href="{% static 'WebSell/contact.css'%}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Websell:home'%}">Home</a></li>
+                <li><a href="{% url 'Websell:products'%}">Products</a></li>
+                <li><a href="{% url 'Websell:about'%}">About</a></li>
+                <li><a href="{% url 'Websell:contact'%}" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <form action="{% url 'Websell:handlecontact'%}" method="POST">
+            {% csrf_token %}
+            {{f.title}}
+
+            {{f.email}}
+
+            {{f.content}}
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Online Store. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css'%}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://media1.thehungryjpeg.com/thumbs2/ori_27204_a86d350a9f84e1366ac204539a66f6625d37ee4d_sacred-geometry-vector-patterns.jpg');
+            background-size: 130%;
+            color: #fff;
+            background-position: -200px;
+            background-repeat: no-repeat;
+        }
+        
+        .products {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 60px;
+            flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng khi không đủ không gian */
+            justify-content: space-between; 
+        }
+        
+        .product {
+            width: 300px;
+            padding: 20px;
+            background-color:rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            margin-bottom: 50px; /* Khoảng cách giữa các sản phẩm */
+            margin-right: 50px;
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        
+        .product h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .product p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #7f057b;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        
+        .btn:hover {
+            background-color: #5d0365;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Websell:home'%}">Home</a></li>
+                <li><a href="{% url 'Websell:products'%}" class="active" >Products</a></li>
+                <li><a href="{% url 'Websell:about'%}">About</a></li>
+                <li><a href="{% url 'Websell:contact'%}">Contact</a></li>
+            </ul>
+            <div class="user">
+                {% if not is_login %}
+                    <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
+                {% else %}
+                    <p>{{username}}</p>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <section class="products">
+        <div class="product">
+            <img src="https://o.remove.bg/downloads/3ab819e1-8bc8-416e-bc65-0dac4f3cd585/R-removebg-preview.png" alt="Product 1">
+            <h3>iPhone 15</h3>
+            <p>Công nghệ tân tiến và trải nghiệm vượt trội.</p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+
+        <div class="product">
+            <img width="200px" src="https://th.bing.com/th/id/R.8a805714a848ab9cc131177d07f1e37e?rik=4rPm%2fqfPiRhf%2fQ&pid=ImgRaw&r=0" alt="Product 2">
+            <h3>Lamborghini</h3>
+            <p>Sự kết hợp hoàn hảo giữa tốc độ, đẳng cấp và đam mê.</p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+
+        <div class="product">
+            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
+            <h3>Ducati</h3>
+            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
+            <h3>Ducati</h3>
+            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
+            <h3>Ducati</h3>
+            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://o.remove.bg/downloads/474745f0-b0a4-4aa0-a511-dd488d584f40/R__1_-removebg-preview.png" alt="Product 3">
+            <h3>Ducati</h3>
+            <p>Khi công nghệ đỉnh cao và cảm giác tốc độ hòa quyện, mọi chuyến đi trở nên đầy hứng khởi và mê hoặc.</p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Online Store. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css'%}">
+    <link rel="stylesheet" href="{% static 'WebSell/home.css'%}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="folder">
+                <li><a href="{% url 'Websell:home'%}">Home</a></li>
+                <li><a href="{% url 'Websell:products'%}">Products</a></li>
+                <li><a href="{% url 'Websell:about'%}">About</a></li>
+                <li><a href="{% url 'Websell:contact'%}">Contact</a></li>
+            </ul>
+            <div class="user">
+                {% if not is_login %}
+                    <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
+                {% else %}
+                    <p>{{username}}</p>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Online Store</h1>
+            <p>Discover a wide range of products for all your needs.</p>
+            <a href="{% url 'Websell:products'%}" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section class="introduction">
+        <div class="container">
+            <h2>About Our Online Store</h2>
+            <p>Welcome to Our Online Store! We are dedicated to providing high-quality products and exceptional customer service. With a wide range of products for all your needs, we strive to make your shopping experience convenient and enjoyable.</p>
+            <p>Our team is committed to sourcing the best products from trusted suppliers, ensuring that you receive only top-notch items. We believe in offering competitive prices without compromising on quality.</p>
+            <p>Whether you're looking for the latest fashion trends, home essentials, electronics, or more, you'll find it all right here. Start exploring our diverse selection of products and discover something that suits your style and preferences.</p>
+
+        </div>
+    </section>
+
+    <section class="guarantee">
+        <div class="container">
+            <h2>Our Guarantee</h2>
+            <p>At Our Online Store, customer satisfaction is our top priority. We stand behind the quality of our products and aim to exceed your expectations in every aspect of your shopping experience.</p>
+            <p>With our guarantee, you can shop with confidence knowing that if you're not satisfied with your purchase, we'll work hard to make it right. Whether it's a refund, exchange, or assistance with any concerns, our dedicated customer support team is here to assist you.</p>
+            <p>We value your trust and strive to build long-lasting relationships with our customers. Your feedback is important to us, and we continuously improve our services based on your suggestions and needs.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Online Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // JavaScript để xử lý hiển thị footer khi cuộn trang đến cuối
+        window.addEventListener('scroll', function() {
+            var footer = document.querySelector('footer');
+            var footerHeight = footer.offsetHeight;
+            var windowHeight = window.innerHeight;
+            var scrollPosition = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
+            if ((scrollPosition + windowHeight) >= (document.body.offsetHeight - footerHeight)) {
+                footer.classList.add('visible');
+            } else {
+                footer.classList.remove('visible');
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+<!-- 
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css'%}">
+    <link rel="stylesheet" href="{% static 'WebSell/home.css'%}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Websell:home'%}">Home</a></li>
+                <li><a href="{% url 'Websell:products'%}">Products</a></li>
+                <li><a href="{% url 'Websell:about'%}">About</a></li>
+                <li><a href="{% url 'Websell:contact'%}">Contact</a></li>
+            </ul>
+            <div class="user">
+                <a href="#">Login</a> | <a href="#">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+    <!-- viết ở đây -->
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Online Store. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> -->

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Link</title>
+    <style>
+        /* CSS cho cái nút */
+        .button-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .button-link:hover {
+            background-color: #45a049;
+        }
+        .success {
+            color: #45a049;
+        }
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    {% if success %}
+        <p class="success">Gửi thành công!</p>
+    {% else %}
+        <p class="fail">Gửi thất bại!</p>
+    {% endif %}
+    <a href="{% url 'Websell:contact'%}" class="button-link">Trở lại</a>
+</body>
+</html>

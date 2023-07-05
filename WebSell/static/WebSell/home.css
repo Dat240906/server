@@ -1,0 +1,79 @@
+
+/* Hero Section Styles */
+.hero {
+    background-color: transparent;
+    padding: 100px 0;
+    text-align: center;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://th.bing.com/th/id/R.7c9a0729ced19ff03b870c3af3e33f05?rik=hOejJWNxJvhnnw&riu=http%3a%2f%2fwebsolutions.com.vn%2fwp-content%2fuploads%2f2017%2f06%2fban-hang-gi-tren-mang.jpg&ehk=TWNnXRVFE6x2r%2bislM1ycub2KCnrpBYSU0pvGdVMwPI%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+    color: #fff;
+    background-position: -200px;
+    background-repeat: no-repeat;
+}
+
+.hero-content {
+    margin-top: 200px;
+}
+
+.hero h1 {
+    font-size: 50px; /* Kích thước chữ */
+    font-weight: bold; /* Độ đậm */
+    text-transform: uppercase; /* Chữ in hoa */
+    margin-bottom: 10px; /* Khoảng cách dưới */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 20px; /* Kích thước chữ */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #666;
+}
+/* Introduction Section Styles */
+.introduction {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    margin-top: 400px;
+}
+
+.introduction h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.introduction p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Guarantee Section Styles */
+.guarantee {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    margin-bottom: 400px;
+}
+
+.guarantee h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.guarantee p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}

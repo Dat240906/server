@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Online Store</title>
+    <link rel="stylesheet" href="{% static 'WebSell/fixed_css.css' %}">
+    <style>
+        .about {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.pinimg.com/736x/fb/3f/c3/fb3fc3b7b58832c7f302273675121df4.jpg');
+            background-size: 130%;
+            color: #fff;
+            background-position: -200px;
+            background-repeat: no-repeat;
+        }
+
+        .chua {
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 10%;
+        }
+
+        .about h1 {
+            font-size: 28px;
+            color: #7f057b;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            animation: typing 1s forwards;
+        }
+
+        .about p {
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: typing-slow 1s forwards;
+        }
+
+        @keyframes typing {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typing-slow {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            50% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Websell:home' %}">Home</a></li>
+                <li><a href="{% url 'Websell:products' %}">Products</a></li>
+                <li><a href="{% url 'Websell:about' %}" class="active" >About</a></li>
+                <li><a href="{% url 'Websell:contact' %}">Contact</a></li>
+            </ul>
+            <div class="user">
+                {% if not is_login %}
+                    <a href="{% url 'Websell:user'%}">Login</a> | <a href="{% url 'Websell:user'%}">Sign Up</a>
+                {% else %}
+                    <p>{{username}}</p>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <section class="about">
+        <div class="chua">
+            <h1>About Us</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut lacus vel est cursus blandit. Proin lacinia justo sed diam ultrices luctus. Nulla id risus sit amet turpis interdum semper. Curabitur facilisis nisi quis ipsum rutrum, ut blandit tortor aliquet.</p>
+            <p>Phasellus ullamcorper lacus sed velit gravida tempus. Quisque nec feugiat neque. Ut sodales lacus mi, eu lacinia nisi condimentum nec. Integer a dui quis dui blandit accumsan. Nunc ut mauris id odio feugiat varius. Aliquam erat volutpat. Sed euismod nulla nec tristique volutpat. Nunc at commodo sem.</p>
+            <p>Donec blandit, ligula in dictum ullamcorper, ex nisi iaculis odio, non condimentum arcu mi vitae tellus. Pellentesque interdum rhoncus efficitur. Nulla bibendum mauris vitae nisi ultricies, nec condimentum elit laoreet. Vestibulum eleifend eleifend tellus eget vestibulum. Sed eget velit cursus, faucibus erat ac, vehicula dui.</p>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Online Store. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var h1 = document.querySelector(".about h1");
+            var paragraphs = document.querySelectorAll(".about p");
+
+            setTimeout(function() {
+                h1.style.opacity = "1";
+            }, 1000);
+
+            for (var i = 0; i < paragraphs.length; i++) {
+                (function(index) {
+                    setTimeout(function() {
+                        paragraphs[index].style.opacity = "1";
+                    }, (index + 1) * 1000);
+                })(i);
+            }
+        });
+    </script>
+</body>
+</html>

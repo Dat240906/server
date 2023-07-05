@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Email</title>
+    <link rel="stylesheet" href="{% static 'news/send_email.css'%}">
+</head>
+<body>
+    <div class="container">
+        <h2>Send Email</h2>
+        <form action="{% url 'news:handle_email' %}" method="POST">
+            {% csrf_token %}
+            
+            {{ f }}<br></br>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
