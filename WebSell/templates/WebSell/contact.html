@@ -193,7 +193,7 @@
 
     <section class="contact">
       <h2>Contact Us</h2>
-      <form action="{% url 'Websell:handlecontact'%}" method="POST">
+      <form action="{% url 'Websell:contact'%}" method="POST">
         {% csrf_token %} {{f.title}} {{f.email}} {{f.content}}
 
         <button type="submit">Submit</button>

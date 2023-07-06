@@ -3,6 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from .models import Account
 from .forms import *
+
 # Create your views here.
 
 
@@ -25,9 +26,19 @@ def about(request):
     is_login = request.session.get('is_login', False)
     username = request.session.get('username', None)
     return render(request, 'WebSell/about.html', {'is_login':is_login, 'username':username})
-def contact(request):
-    info = ContactForm()
-    return render(request, "WebSell/contact.html", {'f':info})
+
+
+class Contact(View):
+    def get(self, request):
+        info = ContactForm()
+        return render(request, "WebSell/contact.html", {'f':info})
+    def post(self, request):
+        try:
+            db = ContactForm(request.POST)
+            db.save()
+            return render(request, 'WebSell/comback_contact.html', {'success':True})
+        except:
+            return render(request, 'WebSell/comback_contact.html', {'success':False})
 
 class User(View):
     def get(self, request):
@@ -35,8 +46,7 @@ class User(View):
         massgae_error_sigup = request.session.get('massage_error_signup', False)
         massgae_error_login = request.session.get('massage_error_login', False)
         return render(request, 'WebSell/user.html', {'f': info, 'massage_error_login':massgae_error_login, 'massage_error_signup':massgae_error_sigup})
-
-class HandleUser(View):
+    
     def post(self, request):
         temp = UserForm(request.POST)
         username_check = request.POST.get('username')
@@ -66,14 +76,6 @@ class HandleUser(View):
                 temp.save()
                 return HttpResponse('success!')
         
-class Contact(View):
-    def post(self, request):
-        try:
-            db = ContactForm(request.POST)
-            db.save()
-            return render(request, 'WebSell/comback_contact.html', {'success':True})
-        except:
-            return render(request, 'WebSell/comback_contact.html', {'success':False})
 
 
 class Logout(View):
